@@ -10,6 +10,8 @@ Caso ele negue, o sistema tenta obter a localização aproximada via IP.
 
 A localização é enviada automaticamente para o bot do Telegram configurado.
 
+Baseado no projeto de Pedro Bessa - https://github.com/PedroHBessa/backscan
+
 ---
 
 ## 🗂️ Estrutura do Projeto
