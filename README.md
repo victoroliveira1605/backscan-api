@@ -16,6 +16,8 @@ Quando o usuário acessa a página:
 
 A localização obtida é enviada automaticamente para o **Telegram**.
 
+Baseado no projeto de Pedro Bessa - https://github.com/PedroHBessa/backscan
+
 ---
 
 ## 🗂️ Estrutura do Projeto
