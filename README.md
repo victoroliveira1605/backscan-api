@@ -5,6 +5,7 @@ Este projeto permite capturar e enviar automaticamente a localização do usuár
 
 Tudo isso rodando 100% online, sem necessidade de servidor próprio — hospedado na **Vercel**.
 
+Baseado no projeto de Pedro Bessa - https://github.com/PedroHBessa/backscan
 ---
 
 ## 🚀 Como Funciona
@@ -15,8 +16,6 @@ Quando o usuário acessa a página:
 ❌ Se negar → Captura aproximada via **IP**
 
 A localização obtida é enviada automaticamente para o **Telegram**.
-
-Baseado no projeto de Pedro Bessa - https://github.com/PedroHBessa/backscan
 
 ---
 
