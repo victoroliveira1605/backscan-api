@@ -1,106 +1,169 @@
 * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f7fb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-    }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  margin: 0;
+}
 
-    .comprovante-container {
-      background-color: white;
-      padding: 40px;
-      width: 450px;
-      border-radius: 12px;
-      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      font-size: 14px;
-      color: #333;
-    }
+.comprovante-container {
+  background-color: #ffffff;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: left;
+  font-size: 14px;
+  color: #333333;
+  line-height: 1.4;
+}
 
-    h1 {
-      color: #9b59b6;
-      font-size: 28px;
-      margin-bottom: 20px;
-      font-weight: bold;
-    }
+/* Logo Nu */
+.logo {
+  margin: 0 0 32px 0;
+  display: flex;
+  align-items: center;
+}
 
-    .informacoes {
-      text-align: left;
-      margin-bottom: 30px;
-      font-size: 16px;
-    }
+.logo img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
 
-    .informacoes p {
-      margin: 8px 0;
-      color: #7f8c8d;
-    }
+/* Título principal */
+.titulo-principal {
+  font-size: 22px;
+  font-weight: 400;
+  color: #000000;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
 
-    .informacoes p span {
-      font-weight: bold;
-      color: #2c3e50;
-    }
+/* Data e hora */
+.data-hora {
+  font-size: 14px;
+  color: #999999;
+  margin-bottom: 32px;
+}
 
-    .botao {
-      background-color: #9b59b6;
-      color: white;
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-      margin-top: 20px;
-    }
+/* Seções de informação */
+.secao-info {
+  margin-bottom: 32px;
+}
 
-    .botao:hover {
-      background-color: #8e44ad;
-      transform: scale(1.05);
-    }
+.secao-titulo {
+  font-size: 14px;
+  color: #999999;
+  margin: 24px 0 16px 0;
+  font-weight: 400;
+}
 
-    .comprovante-footer {
-      margin-top: 30px;
-      font-size: 12px;
-      color: #bdc3c7;
-      line-height: 1.6;
-    }
+.info-linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  min-height: 20px;
+}
 
-    .comprovante-footer a {
-      color: #9b59b6;
-      text-decoration: none;
-    }
+.label {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  letter-spacing: -0.1px;
+}
 
-    .comprovante-footer a:hover {
-      text-decoration: underline;
-    }
+.value {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  text-align: right;
+  letter-spacing: -0.1px;
+}
 
-    .map-link {
-      color: #9b59b6;
-      text-decoration: none;
-      display: block;
-      margin-top: 15px;
-    }
+/* Informações da instituição */
+.instituicao-info {
+  background-color: #f8f8f8;
+  padding: 16px;
+  margin: 32px 0;
+  border-radius: 0;
+}
 
-    .map-link:hover {
-      text-decoration: underline;
-    }
+.instituicao-nome {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
 
-    .location-info {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      font-size: 12px;
-      margin-top: 20px;
-      color: #7f8c8d;
-    }
+.cnpj {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
 
-    .location-info span {
-      font-weight: bold;
-    }
+.transacao-id {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 400;
+  word-break: break-all;
+}
+
+/* Texto de ajuda */
+.texto-ajuda {
+  font-size: 14px;
+  color: #000000;
+  margin: 24px 0 8px 0;
+  line-height: 1.4;
+}
+
+/* Link Me ajuda */
+.link-ajuda {
+  font-size: 14px;
+  color: #820ad1;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.link-ajuda:hover {
+  text-decoration: underline;
+}
+
+/* Informações de contato */
+.contato-info {
+  font-size: 12px;
+  color: #666666;
+  line-height: 1.4;
+  margin-top: 24px;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .comprovante-container {
+    padding: 24px 16px;
+    margin: 10px;
+  }
+  
+  .logo h1 {
+    font-size: 28px;
+  }
+  
+  .titulo-principal {
+    font-size: 20px;
+  }
+}
